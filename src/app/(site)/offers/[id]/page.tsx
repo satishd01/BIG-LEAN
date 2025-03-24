@@ -7,8 +7,11 @@ import { useParams } from "next/navigation";
 type Props = {};
 
 export default function page({}: Props) {
-  const { id } = useParams();
-  const { data } = useGetOfferProducts(Number(id));
+  const params = useParams();
+  const id = params?.id as string; // Ensure `id` is a string
+  const offerId = id ? Number(id) : null; // Convert safely to a number
+
+  const { data } = useGetOfferProducts(offerId ?? 0); 
   return (
     <CustomPageWrapper className="flex flex-col items-center gap-10">
       <img

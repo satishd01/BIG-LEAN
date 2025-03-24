@@ -7,7 +7,8 @@ import { useParams } from "next/navigation";
 type Props = {};
 
 export default function page({}: Props) {
-  const { id } = useParams();
+  const params = useParams();
+  const id  = params?.id as string
   const { data } = useGetComboProducts(Number(id));
   return (
     <CustomPageWrapper className="flex flex-col items-center gap-10">

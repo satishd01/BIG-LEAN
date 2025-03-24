@@ -14,7 +14,8 @@ import { ChangeEvent, useState } from "react";
 
 export default function ShopByBrandPage() {
   const parmas = useSearchParams();
-  const category = parmas.get("category");
+  const category = parmas ? parmas.get("category") : null; // Guard against null
+
   const { filterProductsParams, selectedBrands } = useAppContext();
   const [sorting, setSorting] = useState<string | null>(null);
   const { data: bannersData } = useGetAllBanners();
@@ -23,6 +24,7 @@ export default function ShopByBrandPage() {
     { ...filterProductsParams, sorting: sorting?.trimStart(), category },
     selectedBrands as string
   );
+
   return (
     <CustomPageWrapper className="w-[1400px] px-5">
       <div className="grid grid-cols-4 gap-6">
@@ -34,8 +36,8 @@ export default function ShopByBrandPage() {
             <HomeCarosoul
               bannersData={
                 selectedBrands && !selectedBrands?.includes("&")
-                  ? [{ id: 1, web: allProducts?.brandDetails?.banner }]
-                  : bannersData?.banner || []
+                  ? [{ id: 1, web: allProducts?.brandDetails?.banner ?? "" }]
+                  : bannersData?.banner ?? []
               }
               className="!w-[1000px]"
             />
@@ -67,9 +69,9 @@ export default function ShopByBrandPage() {
               >
                 <option value="">Sort By</option>
                 <option value=" P-lth">Price Low to High</option>
-                <option value=" P-htl">Price HIgh to Low</option>
+                <option value=" P-htl">Price High to Low</option>
                 <option value=" D-lth">Discount Low to High</option>
-                <option value=" D-htl">Discount HIgh to Low</option>
+                <option value=" D-htl">Discount High to Low</option>
                 <option value=" Rating">Rating</option>
               </select>
             </div>
@@ -119,6 +121,7 @@ const Pagination = () => {
     </div>
   );
 };
+
 const PaginationButton = ({
   label,
   active,

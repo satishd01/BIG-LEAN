@@ -4,21 +4,21 @@ import {
   useRemoveFromCart,
   useUpdateQuantityFromCart,
 } from "@/queries/Cart";
-import { cartData } from "./CartProducts";
 
 export default function CartProductCard({
   className,
   productDetail,
 }: {
   className?: string;
-  productDetail: cartData;
+  productDetail: any;
 }) {
   const { mutate: removeFromCart } = useRemoveFromCart();
   const { data } = useGetProductDetail(productDetail?.product?.id, 1);
   const { mutate: updateQuantityFromCart } = useUpdateQuantityFromCart();
   const productData = productDetail?.product?.varients?.find(
-    (varient) => varient.id === productDetail?.varientId
+    (varient: { id: string }) => varient.id === productDetail?.varientId
   );
+  
   return (
     <div
       className={`grid sm-1 rounded-2xl bg-white items-center grid-cols-[max-content_1fr_max-content] gap-8 max-[500px]:gap-4 p-4 ${className}`}

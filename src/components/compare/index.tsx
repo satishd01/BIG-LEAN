@@ -11,9 +11,9 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 export default function ComparePage() {
-  const params = useSearchParams();
-  const productId = params?.get("productId");
-  const { data, isLoading, error } = useGetAllProducts({});
+    const params = useSearchParams();
+    const productId = params?.get("productId");
+    const { data, isLoading, error } = useGetAllProducts({});
   const [productA, setProductA] = useState<any>(null);
   const [productB, setProductB] = useState<any>(null);
 
@@ -33,7 +33,7 @@ export default function ComparePage() {
       );
       console.log("defaultProduct (productA):", defaultProduct);
       if (defaultProduct) {
-        const filterData = {
+        const filterData:any = {
           price: defaultProduct?.varients?.[0]?.sellingPrice,
           weight: defaultProduct?.varients?.[0]?.units,
           brand: defaultProduct?.brand?.heading,
@@ -132,7 +132,7 @@ export const ProductsCompareInfo = ({
   useEffect(() => {
     if (data) {
       const product: ProductDetailType = data?.data?.result;
-      const filterData = {
+      const filterData:any = {
         price: product?.varients?.[0]?.sellingPrice,
         weight: product?.varients?.[0]?.units,
         brand: product?.brand?.heading,

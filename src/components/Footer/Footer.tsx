@@ -47,7 +47,7 @@ export default function Footer() {
     <>
       <div
         className={`text-sm w-[85%] max-xl:w-[95%] max-w-[1300px] mx-auto py-5 ${
-          pathname.includes("product/") ? "max-sm:pb-[200px]" : "max-sm:pb-[80px]"
+          pathname?.includes("product/") ? "max-sm:pb-[200px]" : "max-sm:pb-[80px]"
         }`}
       >
         <p className="">
